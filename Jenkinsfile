@@ -6,16 +6,27 @@ pipeline {
     }
 
     stages {
+
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
-                bat 'npx playwright install'
+                dir('Playwright_POM') {
+                    bat 'npm install'
+                    bat 'npx playwright install'
+                }
             }
         }
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test'
+                dir('Playwright_POM') {
+                    bat 'npx playwright test tests/POM/Login.spec.js --project=chromium'
+                }
             }
         }
     }
