@@ -30,19 +30,19 @@ pipeline {
             }
         }
     }
-}
 
-post {
-    always {
-        emailext(
-            to: 'ajmal933@gmail.com',
-            subject: "Jenkins Build - ${currentBuild.currentResult}",
-            body: """
-            Job: ${env.JOB_NAME}
-            Build Number: ${env.BUILD_NUMBER}
-            Status: ${currentBuild.currentResult}
-            URL: ${env.BUILD_URL}
-            """
-        )
+    post {
+        always {
+            emailext(
+                to: 'ajmal933@gmail.com',
+                subject: "Jenkins Build - ${currentBuild.currentResult}",
+                body: """
+                Job: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                Status: ${currentBuild.currentResult}
+                URL: ${env.BUILD_URL}
+                """
+            )
+        }
     }
 }
